@@ -33,16 +33,11 @@
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # Get the currently logged in user
 currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
-# Get uid logged in user
-uid=$(id -u "${currentUser}")
-# Current User home folder - do it this way in case the folder isn't in /Users
 userHome=$(dscl . -read /users/${currentUser} NFSHomeDirectory | cut -d " " -f 2)
-echo "we will delete the Weave app data from $userHome/Application Support/Weave"
-rm "${userHome}/Library/Application Support/Weave/*.zip"
-rm "${userHome}/Library/Application Support/Weave/*.~zip"</string>
-			<key>preinstall_script</key>
-			<string>#!/bin/bash
-rm -rf /Applications/Weave.app</string>
+directory="$userHome/Library/Application Support/Weave"
+echo "we will delete the Weave update zips from $directory"
+find "$directory" -type f -name "*.zip" -exec rm -f {} +
+find "$directory" -type f -name "*.~zip" -exec rm -f {} +</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
