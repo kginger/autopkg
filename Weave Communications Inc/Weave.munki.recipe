@@ -30,6 +30,7 @@
 			<string>%NAME%</string>
 			<key>postinstall_script</key>
 			<string>#!/bin/bash
+##Weave likes to download the app repeatedly to ~/ Weave. We need to delete these.
 export PATH=/usr/bin:/bin:/usr/sbin:/sbin
 # Get the currently logged in user
 currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
