@@ -21,24 +21,13 @@
 				<string>testing</string>
 			</array>
 			<key>description</key>
-			<string>Weave brings together a world-class phone system and a suite of communication tools, so it's easy to automate more tasks, keep schedules full, get paid faster, collect more reviews, and much more.</string>
+			<string>Create slideshows in Rapidweaver.</string>
 			<key>developer</key>
 			<string>Weave Communications, Inc</string>
 			<key>display_name</key>
 			<string>Weave</string>
 			<key>name</key>
 			<string>%NAME%</string>
-			<key>postinstall_script</key>
-			<string>#!/bin/bash
-##Weave likes to download the app repeatedly to ~/ Weave. We need to delete these.
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin
-# Get the currently logged in user
-currentUser=$( echo "show State:/Users/ConsoleUser" | scutil | awk '/Name :/ { print $3 }' )
-userHome=$(dscl . -read /users/${currentUser} NFSHomeDirectory | cut -d " " -f 2)
-directory="$userHome/Library/Application Support/Weave"
-echo "we will delete the Weave update zips from $directory"
-find "$directory" -type f -name "*.zip" -exec rm -f {} +
-find "$directory" -type f -name "*.~zip" -exec rm -f {} +</string>
 			<key>unattended_install</key>
 			<true/>
 		</dict>
@@ -47,20 +36,23 @@ find "$directory" -type f -name "*.~zip" -exec rm -f {} +</string>
 	<string>2.3</string>
 	<key>ParentRecipe</key>
 	<string>com.github.kginger.download.Weave</string>
+	<key>ParentRecipeTrustInfo</key>
+	<dict>
+		<key>non_core_processors</key>
+		<dict/>
+		<key>parent_recipes</key>
+		<dict>
+			<key>com.github.kginger.download.Weave</key>
+			<dict>
+				<key>path</key>
+				<string>~/Library/Autopkg/RecipeOverrides/Weave Communications, Inc/Weave.download.recipe</string>
+				<key>sha256_hash</key>
+				<string>1182cb9daf10f277e642625c67a77cc6303e457a5468dcfaa012a5b73a83edd6</string>
+			</dict>
+		</dict>
+	</dict>
 	<key>Process</key>
 	<array>
-		<dict>
-			<key>Arguments</key>
-			<dict>
-				<key>additional_pkginfo</key>
-				<dict>
-					<key>version</key>
-					<string>%version%</string>
-				</dict>
-			</dict>
-			<key>Processor</key>
-			<string>MunkiPkginfoMerger</string>
-		</dict>
 		<dict>
 			<key>Arguments</key>
 			<dict>
@@ -68,8 +60,6 @@ find "$directory" -type f -name "*.~zip" -exec rm -f {} +</string>
 				<string>%pathname%</string>
 				<key>repo_subdirectory</key>
 				<string>%MUNKI_REPO_SUBDIR%</string>
-				<key>version_comparison_key</key>
-				<string>CFBundleVersion</string>
 			</dict>
 			<key>Processor</key>
 			<string>MunkiImporter</string>

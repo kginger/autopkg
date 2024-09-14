@@ -23,7 +23,7 @@
 				<key>filename</key>
 				<string>%NAME%.dmg</string>
 				<key>url</key>
-				<string>https://storage.googleapis.com/software-updates.getweave.com/latest/Client.dmg</string>
+				<string>https://releases.getweave.com/download/flavor/stable/latest/osx_64</string>
 			</dict>
 			<key>Processor</key>
 			<string>URLDownloader</string>
@@ -38,7 +38,7 @@
 				<key>input_path</key>
 				<string>%pathname%/Weave.app</string>
 				<key>requirement</key>
-				<string>identifier "com.getweave.weave" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GTN6L5ER8Y</string>
+				<string>identifier "com.weave.app" and anchor apple generic and certificate 1[field.1.2.840.113635.100.6.2.6] /* exists */ and certificate leaf[field.1.2.840.113635.100.6.1.13] /* exists */ and certificate leaf[subject.OU] = GTN6L5ER8Y</string>
 			</dict>
 			<key>Processor</key>
 			<string>CodeSignatureVerifier</string>
@@ -49,7 +49,7 @@
 				<key>input_plist_path</key>
 				<string>%pathname%/Weave.app/Contents/Info.plist</string>
 				<key>plist_version_key</key>
-				<string>CFBundleVersion</string>
+				<string>CFBundleShortVersionString</string>
 			</dict>
 			<key>Processor</key>
 			<string>Versioner</string>
